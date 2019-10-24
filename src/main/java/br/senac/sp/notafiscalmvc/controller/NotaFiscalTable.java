@@ -7,7 +7,7 @@ package br.senac.sp.notafiscalmvc.controller;
 
 /**
  *
- * @author lucas
+ * @author MELO
  */
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,15 +24,16 @@ import javax.swing.table.AbstractTableModel;
  * @author lucas
  */
 public class NotaFiscalTable extends AbstractTableModel {
-    private String[] columnNames = {"NumNota","ValNota"};
+    private String[] columnNames = {" NumNota "," descricaoNota "," ValNota "};
 
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
 
     public int getRowCount() {
-        //implementar metodo
-        return 3;
+        //implementado
+        return NotaFiscalDAO.conta();
+         
     }
 
     public String getColumnName(int col) {
@@ -40,8 +41,15 @@ public class NotaFiscalTable extends AbstractTableModel {
     }
 
     public Object getValueAt(int row, int col) {
-        //implementar metodo
-        return "esse retorno nao faz sentido, corrija quando chegar a hora";
+        //implementado
+        NotaFiscal nota;
+        nota = NotaFiscalDAO.linha(row);
+        if (col==0)
+            return nota.getNumNota();
+        if (col==1)
+        return nota.getDescricaoNota();
+        
+        return nota.getValNota();
     }
 
     public Class getColumnClass(int c) {
